@@ -1,5 +1,6 @@
 import React from "react";
 import ResponseBuilder from "../ResponseBuilder/ResponseBuilder";
+import ResponseButton from "../ResponseButton";
 
 const ResponseManager = () => {
   return (
@@ -7,6 +8,7 @@ const ResponseManager = () => {
       <ResponseBuilder />
       <ResponseBuilder />
       <ResponseBuilder />
+      <ResponseButton />
     </div>
   );
 };

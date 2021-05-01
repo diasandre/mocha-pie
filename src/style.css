@@ -5,7 +5,8 @@ body {
 }
 
 textarea {
-  width: 90%;
+  min-width: 80%;
+  min-height: 150px;
 }
 
 /* textarea:focus {
