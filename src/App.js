@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ResponseManager from "./components/ResponseManager";
+import styled from "styled-components";
+import "./style.css"
 
-function App() {
+const TextLogo = styled.h1`
+  text-align: center;
+  color: #7400b8;
+  font-weight: 800;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <TextLogo>Mocha pie</TextLogo>
+      <ResponseManager />
+    </>
   );
-}
+};
 
 export default App;

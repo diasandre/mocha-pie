@@ -1,0 +1,15 @@
+body {
+  background-color: rgb(250, 249, 250);
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+}
+
+textarea {
+  width: 90%;
+}
+
+/* textarea:focus {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #80ffdb !important;
+} */
