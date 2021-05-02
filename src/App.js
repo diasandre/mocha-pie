@@ -2,6 +2,7 @@ import React from "react";
 import ResponseManager from "./components/ResponseManager";
 import styled from "styled-components";
 import "./style.css";
+import { GiCoffeeMug } from "react-icons/gi";
 
 const Container = styled.div`
   padding: 20px;
@@ -16,6 +17,9 @@ const TextLogo = styled.h1`
   color: #7400b8;
   font-weight: 800;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SubTextLogo = styled.h3`
@@ -29,8 +33,10 @@ const App = () => {
   return (
     <Container>
       <Header>
-        <TextLogo>Mocha pie</TextLogo>
-        <SubTextLogo>control your mocked api behavior like a pro</SubTextLogo>
+        <TextLogo>
+          Mocha pie <GiCoffeeMug />
+        </TextLogo>
+        <SubTextLogo>take control of your api behavior</SubTextLogo>
       </Header>
       <ResponseManager />
     </Container>

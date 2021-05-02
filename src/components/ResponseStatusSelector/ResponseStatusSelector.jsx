@@ -1,10 +1,9 @@
 import React from "react";
 import Select from "react-select";
 import styled from "styled-components";
-import { httpStatus } from "../../constants/httpStatus";
+import { httpStatusGrouped } from "../../constants/httpStatus";
 
 const SelectWrapper = styled.div`
-  width: 20%;
   min-width: 180px;
   margin-right: 20px;
 `;
@@ -29,13 +28,14 @@ const customTheme = (theme) => ({
 const formatGroupLabel = (data) => <span>{data.label}</span>;
 
 const ResponseStatusSelector = ({
+  status,
   onChangeCallback = (value) => console.log(value),
 }) => {
   return (
     <SelectWrapper>
       <Select
-        defaultValue={"200"}
-        options={httpStatus}
+        value={status}
+        options={httpStatusGrouped}
         formatGroupLabel={formatGroupLabel}
         styles={customStyle}
         onChange={onChangeCallback}

@@ -5,7 +5,7 @@ body {
 }
 
 textarea {
-  min-width: 80%;
+  flex: 1;
   min-height: 150px;
 }
 

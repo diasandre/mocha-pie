@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
-import { ContextConsumer } from "../../contexts/ResponseContext";
+import { Context } from "../../contexts/ResponseContext";
 import styled from "styled-components";
 import ResponseStatusSelector from "../ResponseStatusSelector";
 import ResponseActions from "../ResponseActions";
+import AwesomeDebouncePromise from "awesome-debounce-promise";
+import { httpStatus } from "../../constants/httpStatus";
 
 const Wrapper = styled.div`
   display: flex;
   width: 60%;
-  margin: 0 auto;
   align-items: flex-start;
   justify-content: space-between;
   padding: 15px;
@@ -18,22 +19,52 @@ const Wrapper = styled.div`
     rgb(25 19 38 / 5%) 0px 1px 1px;
 `;
 
+const callToUpdate = async (n1, callback) => callback(n1);
+const debounceCall = AwesomeDebouncePromise(callToUpdate, 1000);
+
+const getStatus = (value) =>
+  value != null ? httpStatus.find((item) => item.value === value) : null;
+
 const ResponseBuilder = ({
+  id,
   status: actualStatus,
   responseBody: actualResponseBody,
 }) => {
-  const [status, setStatus] = useState(actualStatus);
+  const [status, setStatus] = useState(getStatus(actualStatus));
   const [responseBody, setResponseBody] = useState(actualResponseBody);
 
-  const { updateResponseBody } = useContext(ContextConsumer);
+  const { isUniqueStatus, updateResponse, addOrUpdateStatus } = useContext(
+    Context
+  );
+
+  const handleOnChangeResponseBody = ({ target: { value } }) => {
+    if (status != null) {
+      setResponseBody(value);
+      debounceCall(
+        { id, status: status.value, responseBody: value },
+        updateResponse
+      );
+    }
+  };
+
+  const handleOnChangeStatus = (newStatus) => {
+    if (isUniqueStatus(newStatus.value)) {
+      setStatus(newStatus);
+      addOrUpdateStatus({
+        id,
+        newStatus: newStatus.value,
+        responseBody,
+      });
+    }
+  };
 
   return (
     <Wrapper>
-      <ResponseStatusSelector />
-      <textarea
-        value={responseBody}
-        onChange={(event) => setResponseBody(event.target.value)}
+      <ResponseStatusSelector
+        status={status}
+        onChangeCallback={handleOnChangeStatus}
       />
+      <textarea value={responseBody} onChange={handleOnChangeResponseBody} />
       <ResponseActions />
     </Wrapper>
   );
