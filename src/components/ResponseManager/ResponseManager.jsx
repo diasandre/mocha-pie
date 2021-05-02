@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import produce from "immer";
-import styled from "styled-components";
 import { ContextProvider } from "../../contexts/ResponseContext";
 import AddButton from "../AddButton";
 import ResponseBuilder from "../ResponseBuilder/ResponseBuilder";
 import ResponseButton from "../ResponseButton";
 import { v4 as uuidv4 } from "uuid";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import { Container } from "./styles";
 
 const defaultItem = () => ({
   id: uuidv4(),
@@ -22,61 +14,54 @@ const defaultItem = () => ({
 
 const ResponseManager = () => {
   const [responses, setResponses] = useState([defaultItem()]);
+  const [editing, setEditing] = useState(responses[0].id);
 
   const addResponse = () => {
-    setResponses([...responses, defaultItem()]);
+    const newResponse = defaultItem();
+
+    if (editing == null) {
+      setEditing(newResponse.id);
+    }
+
+    setResponses([...responses, newResponse]);
   };
 
-  const isUniqueStatus = (status) =>
-    !responses.map((item) => item.status).includes(status);
+  const removeResponse = (id) => {
+    if (editing === id) {
+      setEditing(null);
+    }
 
-  const addOrUpdateStatus = ({ id, newStatus, responseBody }) => {
-    const newResponses = [
-      ...(responses.filter((item) => item.id !== id) || []),
-      {
-        id,
-        status: newStatus,
-        responseBody: responseBody,
-      },
-    ];
-
-    setResponses(newResponses);
-
-    return Promise.resolve(newResponses);
+    setResponses(responses.filter((item) => item.id !== id) || []);
   };
 
   const updateResponse = ({ id, status, responseBody }) => {
-    console.log("teste");
-    const newResponses = [
+    setResponses([
       ...(responses.filter((item) => item.id !== id) || []),
       {
         id,
         status,
         responseBody,
       },
-    ];
-
-    setResponses(newResponses);
-
-    return Promise.resolve(newResponses);
+    ]);
   };
 
-  console.log(responses);
+  const context = {
+    addResponse,
+    removeResponse,
+    updateResponse,
+    setEditing,
+    canEdit: editing == null,
+    canRemove: responses.length > 1,
+  };
 
   return (
-    <ContextProvider
-      value={{
-        addResponse,
-        isUniqueStatus,
-        updateResponse,
-        addOrUpdateStatus,
-      }}
-    >
+    <ContextProvider value={context}>
       <Container>
         <ResponseButton />
         {responses.map(({ id, status, responseBody }) => (
           <ResponseBuilder
             id={id}
+            editing={editing === id}
             status={status}
             responseBody={responseBody}
           />

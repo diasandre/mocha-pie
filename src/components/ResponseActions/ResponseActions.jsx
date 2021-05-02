@@ -1,40 +1,48 @@
-import React from "react";
-import styled from "styled-components";
-
+import React, { useContext } from "react";
+import { Context } from "../../contexts/ResponseContext";
 import { VscJson } from "react-icons/vsc";
-import { RiDeleteBinFill } from "react-icons/ri";
+import {
+  RiDeleteBinFill,
+  RiPencilFill,
+  RiCheckboxCircleFill,
+} from "react-icons/ri";
+import { ActionsContainer, ActionWrapper } from "./styles";
 
-const ActionsContainer = styled.div`
-  min-width: 30px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: #7400b8;
-`;
+const ResponseActions = ({ id, editing, onSaveCallback }) => {
+  const { canEdit, canRemove, setEditing, removeResponse } = useContext(
+    Context
+  );
 
-const ActionWrapper = styled.div`
-  border-radius: 16px;
-  cursor: pointer;
-  margin-bottom: 5px;
+  const handleOnChangeEditing = (value) => {
+    if (value == null) {
+      setEditing(value);
+      onSaveCallback();
+    } else {
+      setEditing(value);
+    }
+  };
 
-  &:hover {
-    background: #f3f3f3;
-  }
-`;
+  const editIcon = editing ? (
+    <RiCheckboxCircleFill onClick={() => handleOnChangeEditing(null)} />
+  ) : (
+    <RiPencilFill onClick={() => handleOnChangeEditing(id)} />
+  );
 
-const Action = ({ children }) => {
-  return <ActionWrapper>{children}</ActionWrapper>;
-};
+  const showEditIcon = editing || (!editing && canEdit) ? editIcon : <></>;
 
-const ResponseActions = () => {
   return (
     <ActionsContainer>
-      <Action>
+      <ActionWrapper>{showEditIcon}</ActionWrapper>
+      <ActionWrapper>
         <VscJson />
-      </Action>
-      <Action>
-        <RiDeleteBinFill />
-      </Action>
+      </ActionWrapper>
+      {canRemove ? (
+        <ActionWrapper>
+          <RiDeleteBinFill onClick={() => removeResponse(id)} />
+        </ActionWrapper>
+      ) : (
+        <></>
+      )}
     </ActionsContainer>
   );
 };

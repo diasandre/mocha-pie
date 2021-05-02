@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import ReactiveButton from "reactive-button";
-import styled from "styled-components";
-
-import { BsPlusCircle } from "react-icons/bs";
-
-const ButtonContainer = styled.div`
-  display: flex;
-  width: 60%;
-  background-color: white;
-  justify-content: flex-end;
-  padding: 15px;
-  margin-bottom: 20px;
-`;
+import { ButtonContainer } from "./styles";
 
 const ResponseButton = () => {
   const [state, setState] = useState("idle");
