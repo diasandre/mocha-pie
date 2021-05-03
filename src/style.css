@@ -8,3 +8,12 @@ textarea {
   flex: 1;
   min-height: 150px;
 }
+
+.result {
+  flex: 1;
+  margin-right: 20px !important;
+}
+
+.icon-button {
+  color: #7400b8 !important;
+}

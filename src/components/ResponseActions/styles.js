@@ -7,13 +7,3 @@ export const ActionsContainer = styled.div`
   flex-direction: column;
   color: #7400b8;
 `;
-
-export const ActionWrapper = styled.div`
-  border-radius: 16px;
-  cursor: pointer;
-  margin-bottom: 5px;
-
-  &:hover {
-    background: #f3f3f3;
-  }
-`;
