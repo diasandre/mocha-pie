@@ -9,10 +9,14 @@ import {
 import { ActionsContainer } from "./styles";
 import { IconButton, Tooltip } from "@material-ui/core";
 
-const IconWithTooltip = ({ title, children }) => {
+const IconWithTooltip = ({ title, children, onClickCallback }) => {
   return (
     <Tooltip title={title} placement="right" arrow>
-      <IconButton size="small" className="icon-button">
+      <IconButton
+        size="small"
+        className="icon-button"
+        onClick={onClickCallback}
+      >
         {children}
       </IconButton>
     </Tooltip>
@@ -34,12 +38,18 @@ const ResponseActions = ({ id, editing, onSaveCallback }) => {
   };
 
   const editIcon = editing ? (
-    <IconWithTooltip title="Save">
-      <RiCheckboxCircleFill onClick={() => handleOnChangeEditing(null)} />
+    <IconWithTooltip
+      title="Save"
+      onClickCallback={() => handleOnChangeEditing(null)}
+    >
+      <RiCheckboxCircleFill />
     </IconWithTooltip>
   ) : (
-    <IconWithTooltip title="Edit">
-      <RiPencilFill onClick={() => handleOnChangeEditing(id)} />
+    <IconWithTooltip
+      title="Edit"
+      onClickCallback={() => handleOnChangeEditing(id)}
+    >
+      <RiPencilFill />
     </IconWithTooltip>
   );
 
@@ -52,8 +62,11 @@ const ResponseActions = ({ id, editing, onSaveCallback }) => {
         <VscJson />
       </IconWithTooltip>
       {canRemove ? (
-        <IconWithTooltip title="Remove">
-          <RiDeleteBinFill onClick={() => removeResponse(id)} />
+        <IconWithTooltip
+          title="Remove"
+          onClickCallback={() => removeResponse(id)}
+        >
+          <RiDeleteBinFill />
         </IconWithTooltip>
       ) : (
         <></>

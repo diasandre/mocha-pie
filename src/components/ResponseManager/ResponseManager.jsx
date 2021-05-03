@@ -9,7 +9,7 @@ import { Container } from "./styles";
 const defaultItem = () => ({
   id: uuidv4(),
   status: null,
-  responseBody: "",
+  responseBody: null,
 });
 
 const ResponseManager = () => {
@@ -60,6 +60,7 @@ const ResponseManager = () => {
         <ResponseButton />
         {responses.map(({ id, status, responseBody }) => (
           <ResponseBuilder
+            key={id}
             id={id}
             editing={editing === id}
             status={status}

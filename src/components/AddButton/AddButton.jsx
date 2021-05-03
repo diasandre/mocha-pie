@@ -7,7 +7,7 @@ const AddButton = () => {
   const { addResponse } = useContext(Context);
 
   return (
-    <IconButton size="large" className="icon-button" onClick={addResponse}>
+    <IconButton size="medium" className="icon-button" onClick={addResponse}>
       <BsPlusCircle />
     </IconButton>
   );

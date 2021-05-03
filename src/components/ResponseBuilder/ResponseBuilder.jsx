@@ -3,6 +3,8 @@ import { Context } from "../../contexts/ResponseContext";
 import ResponseStatusSelector from "../ResponseStatusSelector";
 import ResponseActions from "../ResponseActions";
 import { Wrapper } from "./styles";
+import { isValidJson } from "../../helper/jsonHelper";
+import JsonComponent from "../JsonComponent";
 
 const ResponseBuilder = ({
   id,
@@ -15,8 +17,12 @@ const ResponseBuilder = ({
 
   const { updateResponse } = useContext(Context);
 
-  const handleOnChangeResponseBody = ({ target: { value } }) =>
-    setResponseBody(value);
+  const handleOnChangeResponseBody = ({ target: { value } }) => {
+    setResponseBody({
+      rawValue: value,
+      jsonObject: isValidJson(value, false),
+    });
+  };
 
   const handleOnChangeStatus = (newStatus) => setStatus(newStatus);
 
@@ -24,13 +30,19 @@ const ResponseBuilder = ({
     updateResponse({
       id,
       status,
-      responseBody,
+      responseBody: {
+        rawValue: responseBody?.rawValue,
+        jsonObject: isValidJson(responseBody?.rawValue, true),
+      },
     });
 
   const responseBodyComponent = editing ? (
-    <textarea value={responseBody} onChange={handleOnChangeResponseBody} />
+    <textarea
+      value={responseBody?.rawValue}
+      onChange={handleOnChangeResponseBody}
+    />
   ) : (
-    responseBody
+    <JsonComponent responseBody={responseBody} />
   );
 
   return (

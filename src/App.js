@@ -4,6 +4,9 @@ import "./style.css";
 import { GiCoffeeMug } from "react-icons/gi";
 import { Container, Header, SubTextLogo, TextLogo } from "./styles";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   return (
     <Container>
@@ -14,6 +17,17 @@ const App = () => {
         <SubTextLogo>take control of your api behavior</SubTextLogo>
       </Header>
       <ResponseManager />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={2500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Container>
   );
 };
