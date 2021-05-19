@@ -13,6 +13,7 @@ const defaultItem = () => ({
 });
 
 const ResponseManager = () => {
+  const [uuid, setUuid] = useState(null);
   const [responses, setResponses] = useState([defaultItem()]);
   const [editing, setEditing] = useState(responses[0].id);
 
@@ -54,10 +55,16 @@ const ResponseManager = () => {
     canRemove: responses.length > 1,
   };
 
+  console.log(responses);
+
   return (
     <ContextProvider value={context}>
       <Container>
-        <ResponseButton />
+        <ResponseButton
+          responses={responses}
+          uuid={uuid}
+          onCallback={setUuid}
+        />
         {responses.map(({ id, status, responseBody }) => (
           <ResponseBuilder
             key={id}
