@@ -46,6 +46,15 @@ const ResponseManager = () => {
     ]);
   };
 
+  const onSaveHandler = (uuid) => {
+    setUuid(uuid);
+  };
+
+  const onGetHandler = (uuid, values) => {
+    setUuid(uuid);
+    setResponses(values);
+  };
+
   const context = {
     addResponse,
     removeResponse,
@@ -61,9 +70,10 @@ const ResponseManager = () => {
     <ContextProvider value={context}>
       <Container>
         <ResponseButton
-          responses={responses}
           uuid={uuid}
-          onCallback={setUuid}
+          responses={responses}
+          onSaveCallback={onSaveHandler}
+          onGetCallback={onGetHandler}
         />
         {responses.map(({ id, status, responseBody }) => (
           <ResponseBuilder

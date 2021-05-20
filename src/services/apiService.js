@@ -7,3 +7,5 @@ export const save = (values) =>
   axios.post(`${BASE_URL}${BASE_API}/`, {
     values,
   });
+
+export const get = (uuid) => axios.get(`${BASE_URL}${BASE_API}/${uuid}/edit`);
