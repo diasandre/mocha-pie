@@ -3,10 +3,11 @@ import ReactiveButton from "reactive-button";
 import { ButtonContainer } from "./styles";
 import { TextField } from "@material-ui/core";
 import { get, save } from "../../services/apiService";
+import { toast } from "react-toastify";
 
 const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   const [state, setState] = useState("idle");
-  const [searchField, setSearchField] = useState(uuid);
+  const [searchField, setSearchField] = useState(uuid == null ? "" : uuid);
 
   const onClickHandler = () => {
     setState("loading");
@@ -18,11 +19,22 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   };
 
   const getData = () => {
-    get(searchField).then(({ data: { uuid, values } }) => {
-      onGetCallback(uuid, values);
-      setState("success");
-      setSearchField(null);
-    });
+    get(searchField)
+      .then(({ data: { uuid, values } }) => {
+        onGetCallback(uuid, values);
+        setState("success");
+        setSearchField(null);
+      })
+      .catch(
+        ({
+          response: {
+            data: { reason },
+          },
+        }) => {
+          toast.error(reason);
+          setState("error");
+        }
+      );
   };
 
   const saveData = () => {
@@ -33,15 +45,39 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
       };
     });
 
-    save(mappedData).then(({ data }) => {
-      onSaveCallback(data);
-      setState("success");
-    });
+    const data = {
+      uuid,
+      values: mappedData,
+    };
+
+    save(data)
+      .then(({ data }) => {
+        onSaveCallback(data);
+        setState("success");
+      })
+      .catch(
+        ({
+          response: {
+            data: { reason },
+          },
+        }) => {
+          toast.error(reason);
+          setState("error");
+        }
+      );
   };
 
   const handleChange = ({ target: { value } }) => {
     setSearchField(value);
   };
+
+  const isUpdateState = uuid != null;
+  const textFieldLabel = !isUpdateState ? "Search your UUID" : "";
+  const textFieldValue = isUpdateState ? uuid : searchField;
+
+  const searchOrGenerateLabel = searchField.length > 0 ? "Search" : "Generate";
+
+  const buttonLabel = isUpdateState ? "Update" : searchOrGenerateLabel;
 
   return (
     <ButtonContainer>
@@ -50,9 +86,9 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
         variant="outlined"
         color="primary"
         onChange={handleChange}
-        disabled={uuid != null}
-        label={uuid == null ? "Search your UUID" : "Generated UUID"}
-        value={searchField != null ? searchField : uuid}
+        disabled={isUpdateState}
+        label={textFieldLabel}
+        value={textFieldValue}
       />
       <ReactiveButton
         style={{
@@ -60,8 +96,7 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
         }}
         buttonState={state}
         onClick={onClickHandler}
-        idleText={"Generate"}
-        disabled={uuid != null}
+        idleText={buttonLabel}
       />
     </ButtonContainer>
   );

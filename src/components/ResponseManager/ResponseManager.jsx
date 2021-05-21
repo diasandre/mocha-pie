@@ -5,6 +5,7 @@ import ResponseBuilder from "../ResponseBuilder/ResponseBuilder";
 import ResponseButton from "../ResponseButton";
 import { v4 as uuidv4 } from "uuid";
 import { Container } from "./styles";
+import { isValidJson } from "../../helper/jsonHelper";
 
 const defaultItem = () => ({
   id: uuidv4(),
@@ -51,8 +52,19 @@ const ResponseManager = () => {
   };
 
   const onGetHandler = (uuid, values) => {
+    values.map((item) => {
+      return {
+        ...item,
+        responseBody: {
+          rawValue: item.responseBody,
+          jsonObject: isValidJson(item.responseBody, false),
+        },
+      };
+    });
+
     setUuid(uuid);
     setResponses(values);
+    setEditing(responses[0].id);
   };
 
   const context = {

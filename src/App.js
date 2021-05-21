@@ -7,8 +7,7 @@ import { Container, Header, SubTextLogo, TextLogo } from "./styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "styled-components";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
@@ -41,7 +40,6 @@ const App = () => {
           pauseOnHover
         />
       </Container>
-      >
     </ThemeProvider>
   );
 };
