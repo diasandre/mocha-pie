@@ -11,7 +11,7 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
 
   const onClickHandler = () => {
     setState("loading");
-    if (uuid == null && searchField != null) {
+    if (uuid == null && searchField != null && searchField.length > 0) {
       getData();
     } else {
       saveData();
