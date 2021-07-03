@@ -75,7 +75,8 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   const textFieldLabel = !isUpdateState ? "Search your UUID" : "";
   const textFieldValue = isUpdateState ? uuid : searchField;
 
-  const searchOrGenerateLabel = searchField.length > 0 ? "Search" : "Generate";
+  const searchOrGenerateLabel =
+    searchField != null && searchField.length > 0 ? "Search" : "Generate";
 
   const buttonLabel = isUpdateState ? "Update" : searchOrGenerateLabel;
 
