@@ -38,8 +38,17 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   };
 
   const saveData = () => {
-    if (responses == null || responses.length < 1) {
-      toast.warning("add some response pls");
+    const isResponsesValid =
+      responses.filter(
+        (item) =>
+          item.responseBody != null &&
+          item.status != null &&
+          item.responseBody.jsonObject != null
+      ).length < responses.length;
+
+    if (responses == null || responses.length < 1 || isResponsesValid) {
+      toast.warning("add some valid responses pls");
+      setState("error");
       return;
     }
 

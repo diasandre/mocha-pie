@@ -7,6 +7,7 @@ import {
 } from "react-icons/ri";
 import { ActionsContainer } from "./styles";
 import { IconButton, Tooltip } from "@material-ui/core";
+import { toast } from "react-toastify";
 
 const IconWithTooltip = ({ title, children, onClickCallback }) => {
   return (
@@ -27,7 +28,11 @@ const ResponseActions = ({ id, editing, shouldAllowSave, onSaveCallback }) => {
     useContext(Context);
 
   const handleOnChangeEditing = (value) => {
-    if (!shouldAllowSave) return;
+    if (!shouldAllowSave) {
+      toast.warning("fill all fields to save rsrs");
+      return;
+    }
+
     if (value == null) {
       setEditing(value);
       onSaveCallback();
