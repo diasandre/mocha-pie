@@ -38,6 +38,11 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   };
 
   const saveData = () => {
+    if (responses == null || responses.length < 1) {
+      toast.warning("add some response pls");
+      return;
+    }
+
     const mappedData = responses.map((item) => {
       return {
         ...item,
@@ -72,7 +77,7 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   };
 
   const isUpdateState = uuid != null;
-  const textFieldLabel = !isUpdateState ? "Search your UUID" : "";
+  const textFieldLabel = !isUpdateState ? "Search or generate your UUID" : "";
   const textFieldValue = isUpdateState ? uuid : searchField;
 
   const searchOrGenerateLabel =

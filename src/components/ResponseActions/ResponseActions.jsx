@@ -23,12 +23,12 @@ const IconWithTooltip = ({ title, children, onClickCallback }) => {
   );
 };
 
-const ResponseActions = ({ id, editing, onSaveCallback }) => {
-  const { canEdit, canRemove, setEditing, removeResponse } = useContext(
-    Context
-  );
+const ResponseActions = ({ id, editing, shouldAllowSave, onSaveCallback }) => {
+  const { canEdit, canRemove, setEditing, removeResponse } =
+    useContext(Context);
 
   const handleOnChangeEditing = (value) => {
+    if (!shouldAllowSave) return;
     if (value == null) {
       setEditing(value);
       onSaveCallback();
@@ -58,9 +58,9 @@ const ResponseActions = ({ id, editing, onSaveCallback }) => {
   return (
     <ActionsContainer>
       {showEditIcon}
-      <IconWithTooltip title="Format">
+      {/* <IconWithTooltip title="Format">
         <VscJson />
-      </IconWithTooltip>
+      </IconWithTooltip> */}
       {canRemove ? (
         <IconWithTooltip
           title="Remove"

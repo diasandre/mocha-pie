@@ -52,7 +52,7 @@ const ResponseManager = () => {
   };
 
   const onGetHandler = (uuid, values) => {
-    values.map((item) => {
+    const mappedValues = values.map((item) => {
       return {
         ...item,
         responseBody: {
@@ -63,7 +63,7 @@ const ResponseManager = () => {
     });
 
     setUuid(uuid);
-    setResponses(values);
+    setResponses(mappedValues);
     setEditing(responses[0].id);
   };
 
