@@ -64,7 +64,7 @@ const ResponseManager = () => {
 
     setUuid(uuid);
     setResponses(mappedValues);
-    setEditing(responses[0].id);
+    setEditing(mappedValues[0].id);
   };
 
   const context = {
