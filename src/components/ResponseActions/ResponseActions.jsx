@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../../contexts/ResponseContext";
-import { VscJson } from "react-icons/vsc";
 import {
   RiDeleteBinFill,
   RiPencilFill,
@@ -58,9 +57,6 @@ const ResponseActions = ({ id, editing, shouldAllowSave, onSaveCallback }) => {
   return (
     <ActionsContainer>
       {showEditIcon}
-      {/* <IconWithTooltip title="Format">
-        <VscJson />
-      </IconWithTooltip> */}
       {canRemove ? (
         <IconWithTooltip
           title="Remove"
