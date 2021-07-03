@@ -56,6 +56,9 @@ const ResponseBuilder = ({
       <ResponseActions
         id={id}
         editing={editing}
+        shouldAllowSave={
+          status != null && status.lenght > 0 && responseBody != null
+        }
         onSaveCallback={onSaveCallback}
       />
     </Wrapper>
