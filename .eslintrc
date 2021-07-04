@@ -16,7 +16,7 @@
       "no-eval": "error",
       "indent": ["error", 2],
       "quotes": ["warn", "single"],
-      "linebreak-style": ["error", "windows"],
+      "linebreak-style": 0,
       "no-console": ["error", { "allow": ["warn", "info"] }],
       "space-before-function-paren": ["error", "never"],
       "padded-blocks": 1,
