@@ -8,16 +8,8 @@
       "mocha": false
     },
     "parserOptions": {
-        "sourceType": "module"
-    },
-    "ecmaFeatures": {
-      "arrowFunctions": true,
-      "blockBindings": true,
-      "classes": true,
-      "defaultParams": true,
-      "modules": true,
-      "spread": true,
-      "globalReturn": true,
+        "sourceType": "module",
+        "ecmaVersion": 6
     },
     "rules": {
       "no-var": 1,
