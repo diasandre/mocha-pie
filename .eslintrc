@@ -15,7 +15,7 @@
       "no-var": 1,
       "no-eval": "error",
       "indent": ["error", 2],
-      "quotes": ["warn", "single"],
+      "quotes": [2, "backtick", "single"],
       "linebreak-style": 0,
       "no-console": ["error", { "allow": ["warn", "info"] }],
       "space-before-function-paren": ["error", "never"],
