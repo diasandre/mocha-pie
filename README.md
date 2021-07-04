@@ -1,5 +1,7 @@
 # mocha-pie 
 
+[![codebeat badge](https://codebeat.co/badges/58e6b2e5-4bc5-46f7-8073-b27c0ffc4878)](https://codebeat.co/projects/github-com-diasandre-mocha-pie-main)
+
 ## How to use:
 - create your responses at: https://mocha-pie.netlify.app/
 - generate UUID
