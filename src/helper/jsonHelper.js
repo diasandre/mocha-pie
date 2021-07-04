@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 export const isValidJson = (value, showToast) => {
   if (value == null) {
@@ -8,7 +8,7 @@ export const isValidJson = (value, showToast) => {
   try {
     return JSON.parse(value);
   } catch (e) {
-    if (showToast) toast.error("JSON is not valid 😵");
+    if (showToast) toast.error('JSON is not valid 😵');
     return null;
   }
 };

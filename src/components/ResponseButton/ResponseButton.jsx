@@ -1,28 +1,19 @@
-import React, { useState } from "react";
-import ReactiveButton from "reactive-button";
-import { ButtonContainer } from "./styles";
-import { TextField } from "@material-ui/core";
-import { get, save } from "../../services/apiService";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import ReactiveButton from 'reactive-button';
+import { TextField } from '@material-ui/core';
+import { toast } from 'react-toastify';
+import { ButtonContainer } from './styles';
+import { get, save } from '../../services/apiService';
 
 const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
-  const [state, setState] = useState("idle");
-  const [searchField, setSearchField] = useState(uuid == null ? "" : uuid);
-
-  const onClickHandler = () => {
-    setState("loading");
-    if (uuid == null && searchField != null && searchField.length > 0) {
-      getData();
-    } else {
-      saveData();
-    }
-  };
+  const [state, setState] = useState('idle');
+  const [searchField, setSearchField] = useState(uuid == null ? '' : uuid);
 
   const getData = () => {
     get(searchField)
-      .then(({ data: { uuid, values } }) => {
-        onGetCallback(uuid, values);
-        setState("success");
+      .then(({ data: { uuid: dataUUID, values } }) => {
+        onGetCallback(dataUUID, values);
+        setState('success');
         setSearchField(null);
       })
       .catch(
@@ -32,8 +23,8 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
           },
         }) => {
           toast.error(reason);
-          setState("error");
-        }
+          setState('error');
+        },
       );
   };
 
@@ -41,23 +32,19 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
     const isResponsesValid =
       responses.filter(
         (item) =>
-          item.responseBody != null &&
-          item.status != null &&
-          item.responseBody.jsonObject != null
+          item.responseBody != null && item.status != null && item.responseBody.jsonObject != null,
       ).length < responses.length;
 
     if (responses == null || responses.length < 1 || isResponsesValid) {
-      toast.warning("add some valid responses pls");
-      setState("error");
+      toast.warning('add some valid responses pls');
+      setState('error');
       return;
     }
 
-    const mappedData = responses.map((item) => {
-      return {
-        ...item,
-        responseBody: item.responseBody.rawValue,
-      };
-    });
+    const mappedData = responses.map((item) => ({
+      ...item,
+      responseBody: item.responseBody.rawValue,
+    }));
 
     const data = {
       uuid,
@@ -65,9 +52,9 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
     };
 
     save(data)
-      .then(({ data }) => {
-        onSaveCallback(data);
-        setState("success");
+      .then(({ data: newData }) => {
+        onSaveCallback(newData);
+        setState('success');
       })
       .catch(
         ({
@@ -76,9 +63,18 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
           },
         }) => {
           toast.error(reason);
-          setState("error");
-        }
+          setState('error');
+        },
       );
+  };
+
+  const onClickHandler = () => {
+    setState('loading');
+    if (uuid == null && searchField != null && searchField.length > 0) {
+      getData();
+    } else {
+      saveData();
+    }
   };
 
   const handleChange = ({ target: { value } }) => {
@@ -86,13 +82,13 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
   };
 
   const isUpdateState = uuid != null;
-  const textFieldLabel = !isUpdateState ? "Search or generate your UUID" : "";
+  const textFieldLabel = !isUpdateState ? 'Search or generate your UUID' : '';
   const textFieldValue = isUpdateState ? uuid : searchField;
 
   const searchOrGenerateLabel =
-    searchField != null && searchField.length > 0 ? "Search" : "Generate";
+    searchField != null && searchField.length > 0 ? 'Search' : 'Generate';
 
-  const buttonLabel = isUpdateState ? "Update" : searchOrGenerateLabel;
+  const buttonLabel = isUpdateState ? 'Update' : searchOrGenerateLabel;
 
   return (
     <ButtonContainer>
@@ -107,7 +103,7 @@ const ResponseButton = ({ responses, uuid, onSaveCallback, onGetCallback }) => {
       />
       <ReactiveButton
         style={{
-          backgroundColor: "#7400b8",
+          backgroundColor: '#7400b8',
         }}
         buttonState={state}
         onClick={onClickHandler}

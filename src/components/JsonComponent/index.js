@@ -1,3 +1,3 @@
-import JsonComponent from "./JsonComponent";
+import JsonComponent from './JsonComponent';
 
 export default JsonComponent;

@@ -1,3 +1,3 @@
-import ResponseManager from "./ResponseManager";
+import ResponseManager from './ResponseManager';
 
 export default ResponseManager;

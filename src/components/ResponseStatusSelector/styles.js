@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SelectWrapper = styled.div`
   min-width: 180px;
@@ -16,8 +16,8 @@ export const customTheme = (theme) => ({
   ...theme,
   colors: {
     ...theme.colors,
-    primary25: "#dabfea",
-    primary50: "#dabfea",
-    primary: "#7400b8",
+    primary25: '#dabfea',
+    primary50: '#dabfea',
+    primary: '#7400b8',
   },
 });

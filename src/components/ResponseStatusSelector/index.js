@@ -1,3 +1,3 @@
-import ResponseStatusSelector from "./ResponseStatusSelector";
+import ResponseStatusSelector from './ResponseStatusSelector';
 
 export default ResponseStatusSelector;

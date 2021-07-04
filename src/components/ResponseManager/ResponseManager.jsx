@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { ContextProvider } from "../../contexts/ResponseContext";
-import AddButton from "../AddButton";
-import ResponseBuilder from "../ResponseBuilder/ResponseBuilder";
-import ResponseButton from "../ResponseButton";
-import { v4 as uuidv4 } from "uuid";
-import { Container } from "./styles";
-import { isValidJson } from "../../helper/jsonHelper";
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { ContextProvider } from '../../contexts/ResponseContext';
+import AddButton from '../AddButton';
+import ResponseBuilder from '../ResponseBuilder/ResponseBuilder';
+import ResponseButton from '../ResponseButton';
+import { Container } from './styles';
+import { isValidJson } from '../../helper/jsonHelper';
 
 const defaultItem = () => ({
   id: uuidv4(),
@@ -47,22 +47,20 @@ const ResponseManager = () => {
     ]);
   };
 
-  const onSaveHandler = (uuid) => {
-    setUuid(uuid);
+  const onSaveHandler = (newUUID) => {
+    setUuid(newUUID);
   };
 
-  const onGetHandler = (uuid, values) => {
-    const mappedValues = values.map((item) => {
-      return {
-        ...item,
-        responseBody: {
-          rawValue: item.responseBody,
-          jsonObject: isValidJson(item.responseBody, false),
-        },
-      };
-    });
+  const onGetHandler = (actualUUID, values) => {
+    const mappedValues = values.map((item) => ({
+      ...item,
+      responseBody: {
+        rawValue: item.responseBody,
+        jsonObject: isValidJson(item.responseBody, false),
+      },
+    }));
 
-    setUuid(uuid);
+    setUuid(actualUUID);
     setResponses(mappedValues);
     setEditing(mappedValues[0].id);
   };
@@ -75,8 +73,6 @@ const ResponseManager = () => {
     canEdit: editing == null,
     canRemove: responses.length > 1,
   };
-
-  console.log(responses);
 
   return (
     <ContextProvider value={context}>

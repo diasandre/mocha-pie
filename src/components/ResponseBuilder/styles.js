@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,6 +9,5 @@ export const Wrapper = styled.div`
   margin-bottom: 10px;
   background-color: rgb(255, 255, 255);
   border-radius: 16px;
-  box-shadow: rgb(25 19 38 / 10%) 0px 2px 12px -8px,
-    rgb(25 19 38 / 5%) 0px 1px 1px;
+  box-shadow: rgb(25 19 38 / 10%) 0px 2px 12px -8px, rgb(25 19 38 / 5%) 0px 1px 1px;
 `;

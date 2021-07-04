@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ActionsContainer = styled.div`
   min-width: 30px;

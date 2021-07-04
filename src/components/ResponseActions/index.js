@@ -1,3 +1,3 @@
-import ResponseActions from "./ResponseActions";
+import ResponseActions from './ResponseActions';
 
 export default ResponseActions;

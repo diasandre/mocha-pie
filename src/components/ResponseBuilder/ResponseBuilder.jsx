@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../../contexts/ResponseContext";
-import ResponseStatusSelector from "../ResponseStatusSelector";
-import ResponseActions from "../ResponseActions";
-import { Wrapper } from "./styles";
-import { isValidJson } from "../../helper/jsonHelper";
-import JsonComponent from "../JsonComponent";
+import React, { useContext, useState } from 'react';
+import { Context } from '../../contexts/ResponseContext';
+import ResponseStatusSelector from '../ResponseStatusSelector';
+import ResponseActions from '../ResponseActions';
+import { Wrapper } from './styles';
+import { isValidJson } from '../../helper/jsonHelper';
+import JsonComponent from '../JsonComponent';
 
 const ResponseBuilder = ({
   id,
@@ -37,10 +37,7 @@ const ResponseBuilder = ({
     });
 
   const responseBodyComponent = editing ? (
-    <textarea
-      value={responseBody?.rawValue}
-      onChange={handleOnChangeResponseBody}
-    />
+    <textarea value={responseBody?.rawValue} onChange={handleOnChangeResponseBody} />
   ) : (
     <JsonComponent responseBody={responseBody} />
   );

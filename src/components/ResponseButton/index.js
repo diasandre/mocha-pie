@@ -1,3 +1,3 @@
-import ResponseButton from "./ResponseButton";
+import ResponseButton from './ResponseButton';
 
 export default ResponseButton;

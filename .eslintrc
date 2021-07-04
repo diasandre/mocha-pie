@@ -1,0 +1,50 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+      "browser": false,
+      "node": true,
+      "es6": true,
+      "mocha": false
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "ecmaFeatures": {
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "classes": true,
+      "defaultParams": true,
+      "modules": true,
+      "spread": true,
+      "globalReturn": true,
+    },
+    "rules": {
+      "no-var": 1,
+      "no-eval": "error",
+      "indent": ["error", 2],
+      "quotes": ["warn", "single"],
+      "linebreak-style": ["error", "windows"],
+      "no-console": ["error", { "allow": ["warn", "info"] }],
+      "space-before-function-paren": ["error", "never"],
+      "padded-blocks": 1,
+      "react/prop-types": 0,
+      "prefer-arrow-callback": [0, { "allowNamedFunctions": true }],
+      "func-names": ["error", "never"],
+      "implicit-arrow-linebreak": 0,
+      "no-use-before-define": [
+        "error", {
+          "functions": true,
+          "classes": true
+        }
+      ],
+      "max-nested-callbacks": [
+        "error",
+        5
+      ],
+      "object-curly-newline": 0,
+      "eqeqeq": [2, "smart"],
+      "operator-linebreak": ["error", "after"],
+      "import/prefer-default-export": 0
+    }
+  }
